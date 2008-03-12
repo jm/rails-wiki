@@ -17,8 +17,11 @@
 class Page < ActiveRecord::Base
   belongs_to :user
   acts_as_versioned
+  self.non_versioned_columns << 'locked'
   attr_accessor :ip, :agent, :referrer
   acts_as_indexed :fields => [:title, :body, :author]
+  
+  validates_presence_of :title
   
   before_save :set_permalink
  
@@ -44,7 +47,7 @@ class Page < ActiveRecord::Base
   
   def set_permalink
     if self.permalink.blank?
-      self.permalink = Page.count == 0 ? "home" : "#{title.downcase.strip.gsub(' ', '-')}" 
+      self.permalink = Page.count == 0 ? "home" : "#{title.downcase.strip.gsub(/ |\.|@/, '-')}" 
     end
   end
   
@@ -60,5 +63,4 @@ class Page < ActiveRecord::Base
     pages = self.find(:all)
     pages.select {|p| p.body =~ /#{wiki_word}/i}
   end
-  
 end

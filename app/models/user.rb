@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_protected :admin
   
-  has_many :pages
+  has_many :pages, :order => 'title ASC'
 
   validates_presence_of     :login, :email, :if => :not_openid?
   validates_presence_of     :password,                   :if => :password_required?

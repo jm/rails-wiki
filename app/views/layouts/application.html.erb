@@ -13,7 +13,7 @@
 
 	<div id="header">
 		<div id="navbar"></div>
-		<h1><%= link_to site.title, wiki_page_url("home"), :id => "site_name" %></h1>
+		<h1><%= image_tag 'rails.png', :style => 'float: left; margin-right: 10px; margin-bottom: 10px' %> <%= link_to site.title, wiki_page_url("home"), :id => "site_name" %> <span id="subtitle"><br />The community wiki</span></h1>
 	</div><!-- end #header -->
 	
 	<div id="container">
@@ -29,6 +29,12 @@
 		  	</script>
 	
 			<%= yield %>
+			
+			<div id="bottom">
+			  All content is released under the GNU Free Documentation License.<br />
+			  Wiki powered by Signal, hosted by Slicehost.
+			</div>
+			
 		</div><!-- end #main -->
 		
 		<div id="right">

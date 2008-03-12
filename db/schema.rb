@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 10) do
+ActiveRecord::Schema.define(:version => 11) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "size"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 10) do
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "private_page"
+    t.boolean  "private_page", :default => false
   end
 
   create_table "pages", :force => true do |t|
@@ -62,8 +62,32 @@ ActiveRecord::Schema.define(:version => 10) do
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "private_page", :default => false
+    t.integer  "version",      :default => 1
+    t.boolean  "locked"
+  end
+
+  create_table "pg", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
+    t.string   "permalink"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "private_page"
     t.integer  "version"
+  end
+
+  create_table "pv", :force => true do |t|
+    t.integer  "page_id"
+    t.integer  "version"
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
+    t.string   "permalink"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "private_page"
   end
 
   create_table "sites", :force => true do |t|

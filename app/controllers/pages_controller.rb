@@ -129,6 +129,26 @@ class PagesController < ApplicationController
     end
   end
   
+  def lock
+    @page = Page.find_by_permalink(params[:id])
+    
+    Page.without_revision do    
+      if @page.locked? 
+        @page.locked = false
+        RAILS_DEFAULT_LOGGER.info "UNLOCK"
+      else
+        @page.locked = true
+        RAILS_DEFAULT_LOGGER.info "LOCK"
+      end
+      
+      @page.save
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to(wiki_page_url(@page)) }
+      format.xml  { head :ok }
+    end
+  end
   
   def check_private
     @page = Page.find_by_permalink(params[:id])

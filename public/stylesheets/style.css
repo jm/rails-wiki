@@ -3,7 +3,8 @@
 ******************************************************************/
 
 body {
-	background: #DEDEDE;
+	background: #fff url('/images/topbluefade.gif') repeat-x;
+	background-position: 0px 60px;
 	font-family:Arial,Helvetica,sans-serif;
 	margin:0pt;
 	padding:0pt;
@@ -41,7 +42,13 @@ a {
 
 #site_name {
 	text-decoration: none;
-	color: black;
+	color: white;
+	text-shadow: 2pt 2pt black;
+}
+
+#subtitle {
+  font-size: 8pt;
+  color: #884444;
 }
 
 /******************************************************************
@@ -49,9 +56,9 @@ a {
 ******************************************************************/
 
 #header {
-	padding:10px 4%;
+	padding: 10px 5px 15px 5px;
 	border-bottom: 2px solid black;
-	background: white;
+	background: #1e0000 url('/images/tile.png');
 }
 
 #header ul#nav {
@@ -73,31 +80,63 @@ a {
 	font-size: 1.3em;
 }
 
+#header a {
+  color: white; 
+  text-decoration: none;
+  font-weight: bold;
+}
+
 /******************************************************************
   #Container and #Main color and layout control
 ******************************************************************/
 
 #container {
-	margin: 15px 50px;
-	padding: 20px;
+	margin: 1px 0px;
+	padding: 0px;
 	min-width: 970px;
 }
 
 #main {
 	float: left;
-	width: 600px;
+	width: 750px;
 	min-width: 400px;
 	margin: 0;
-	padding: 20px;
+	padding: 0px 25px;
 	background: white;
-	border-bottom: 3px solid grey;
+	border-bottom: 3px solid #333;
+	border-right: 2px solid #666;
 }
 
-#main h2 {
-	margin: 0;
-	padding: 0;
-	font-size: 1.3em;
+#main h1, h2 {
+	font-size: 16pt;
+	color: #666;
 }
+
+#main h3 {
+  font-size: 14pt;
+  color: #666;
+}
+
+#main h4, h5, h6 {
+  font-size: 12pt;
+	color: #666;
+}
+
+#main h2.title {
+  color: #000;
+  font-size: 18pt;
+  border-bottom: 1px dotted #ddd;
+  padding-bottom: 5px;
+}
+
+#main a {
+  text-decoration: none;
+  border-bottom: 1px dotted #00f;
+}
+
+#main a:after { content: url('/images/external.png'); }
+
+#main a.wiki_link:after { content: ""; }
 
 /******************************************************************
   Meta info layout/styling
@@ -105,9 +144,9 @@ a {
 
 #right {
 	float: left;
-	margin-left:3%;
+	margin-left:20px;
 	margin-right:0pt;
-	margin-top:1em;
+	margin-top:20px;
 	width:19%;
 }
 
@@ -214,4 +253,22 @@ a.attachment_link {
 	border: none;
 	text-decoration: none;
 	margin: 0 auto;
+}
+
+/******************************************************************
+  Code layout
+******************************************************************/
+CODE {
+  overflow: hidden;
+}
+
+PRE {
+  overflow: auto;
+}
+
+#bottom {
+  text-align: center;
+  font-size: 8pt;
+  color: #666;
+  margin: 30px 0px 20px 0px;
 }
