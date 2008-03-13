@@ -1,0 +1,10 @@
+--- 
+user: mongrel_rails-wiki
+group: app_rails-wiki
+cwd: /var/www/apps/rails-wiki/current
+log_file: /var/www/apps/rails-wiki/shared/log/mongrel.log
+port: "8000"
+environment: production
+address: 127.0.0.1
+pid_file: /var/www/apps/rails-wiki/shared/pids/mongrel.pid
+servers: 2

@@ -1,7 +1,6 @@
 log/*.log
 log/*.pid
 coverage
-config/database.yml
 tmp/**/*
 .DS_Store
 doc/api

@@ -1,6 +1,11 @@
-set :application, "Rails Wiki"
+require 'rubygems'
+require 'deprec/recipes'
+
+default_run_options[:pty] = true
+set :application, "rails-wiki"
 set :scm, :git
-set :repository,  ""
+set :scm_passphrase, "pilgrim"
+set :repository,  "git@github.com:jeremymcanally/rails-wiki.git"
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
@@ -11,9 +16,9 @@ set :repository,  ""
 # your SCM below:
 # set :scm, :subversion
 
-role :app, "your app-server here"
-role :web, "your web-server here"
-role :db,  "your db-server here", :primary => true
+role :app, "deploy@67.207.142.186"
+role :web, "deploy@67.207.142.186"
+role :db,  "deploy@67.207.142.186", :primary => true
 
 # my custom stack install, including all necessary packages for rails, mysql, and nginx
  
