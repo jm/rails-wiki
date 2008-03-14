@@ -21,7 +21,11 @@
 			<div id="flash">
 			  <p id="error_div_id"></p>
 			  <p id="notice_div_id"></p>
-			  <p id="site"><%= site.message unless site.message.empty? %></p>
+			  <% unless site.message.empty? %>
+			    <p id="site">
+			     <%= site.message %>
+			    </p>
+			  <% end %>
 			</div>
 			<script type="text/javascript">
 		    	Flash.transferFromCookies();
