@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 11) do
+ActiveRecord::Schema.define(:version => 12) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "size"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(:version => 11) do
     t.boolean  "disable_teh"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "message"
   end
 
   create_table "users", :force => true do |t|
