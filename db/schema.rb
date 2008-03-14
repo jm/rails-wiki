@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 12) do
+ActiveRecord::Schema.define(:version => 13) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "size"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 12) do
     t.boolean  "private_page", :default => false
     t.integer  "version",      :default => 1
     t.boolean  "locked"
+    t.boolean  "can_attach"
   end
 
   create_table "pg", :force => true do |t|

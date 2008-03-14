@@ -11,8 +11,14 @@
   <p>
 	<label for="private_page">Make page private</label>
     <%= f.check_box :private_page %>
+  </p>
 	
-  <p>
+	<% if logged_in? && current_user.admin? %>
+  	<p>
+  	<label for="can_attach">Enable attachments?</label>
+  	  <%= f.check_box :can_attach %>
+  	</p>
+	<% end %>
 	
 	<%= f.hidden_field :permalink %>
 	
