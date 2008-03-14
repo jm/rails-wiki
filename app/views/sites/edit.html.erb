@@ -4,26 +4,40 @@
 
 <% form_for(@site, :url => site_path) do |f| %>
   <p>
-    <label for="site_title">Site title</label><br />
+    <label for="site_title">
+      Site title
+      <span class="subtext"><br />The site title is shown at the top of every page.</span>
+    </label><br />
     <%= f.text_field :title %>
+  </p>
+  
+  <p>
+    <label for="message">
+      Current site message
+      <span class="subtext"><br />This message will be shown on every page, useful for downtime messages, etc.</span>
+    </label><br />
+    <%= f.text_field :message %>
   </p>
 
   <p>
-    <label for="akismet_key">Akismet key</label><br />
+    <label for="akismet_key">
+      Akismet key
+      <span class="subtext"><br />Your Akismet API key.</span>
+    </label><br />
     <%= f.text_field :akismet_key %>
   </p>
 
   <p>
-    <label for="akismet url">Akismet url</label><br />
+    <label for="akismet_url">Akismet URL</label><br />
     <%= f.text_field :akismet_url %>
   </p>
 
   <p>
-    <%= f.check_box :require_approval %> <b>Require approval</b>
+    <%= f.check_box :require_approval %> <b>Require approval</b> <span class="subtext">Require approval for new users.</span>
   </p>
 
   <p>
-    <%= f.check_box :require_login_to_post %> <b>Require login to post</b>
+    <%= f.check_box :require_login_to_post %> <b>Require login</b> <span class="subtext">Require login to post</span>
   </p>
 
   <p>
