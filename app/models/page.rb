@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 10
+# Schema version: 13
 #
 # Table name: pages
 #
@@ -12,21 +12,29 @@
 #  updated_at   :datetime      
 #  private_page :boolean       
 #  version      :integer       
+#  site_id      :integer       
+#  locked       :boolean       
 #
 
 class Page < ActiveRecord::Base
   belongs_to :user
+  belongs_to :site
+  has_many :inbound_links,  :class_name => "Link", :foreign_key => "to_page_id"
+  has_many :outbound_links, :class_name => "Link", :foreign_key => "from_page_id"
   acts_as_versioned
-  self.non_versioned_columns << 'locked'
+  self.non_versioned_columns << 'locked_at'
   attr_accessor :ip, :agent, :referrer
   acts_as_indexed :fields => [:title, :body, :author]
   
   validates_presence_of :title
   
   before_save :set_permalink
- 
+  before_update :set_links
+  after_create  :set_links
+  validates_presence_of :title, :body
+  validate_on_update :updatable
+
   def validate
-    site = Site.find(:first)
     if site.akismet_key? && is_spam?(site)
       errors.add_to_base "Your comment was marked as spam, please contact the site admin if you feel this was a mistake."
     end
@@ -51,6 +59,20 @@ class Page < ActiveRecord::Base
     end
   end
   
+  def set_links
+    Link.transaction do
+      # outbound_links.delete_all
+      body.scan(/\[\[(.*?)\]\]/).each do |link|
+        link = link[0].downcase.gsub(' ', '-')
+        if page = site.pages.find_by_permalink(link)
+          Link.create! :from_page_id => id, :to_page_id => page.id
+        else
+          logger.warn "We couldn't find links for #{link}"
+        end
+      end
+    end
+  end
+  
   def to_param
     self.permalink
   end
@@ -59,8 +81,32 @@ class Page < ActiveRecord::Base
     (user && user.login) ? user.login.to_s.capitalize : "Anonymous"
   end
   
-  def self.find_all_by_wiki_word(wiki_word)
-    pages = self.find(:all)
+  def lock
+    self.without_revision do
+      self.update_attribute(:locked_at, Time.now)
+    end
+    RAILS_DEFAULT_LOGGER.info "LOCKED #{self.permalink}"
+  end
+  
+  def unlock
+    self.without_revision do
+      self.update_attribute(:locked_at, nil)
+    end
+    RAILS_DEFAULT_LOGGER.info "UNLOCKED #{self.permalink}"
+  end
+  
+  def self.find_all_by_wiki_word(wiki_word, site = nil)
+    site ||= Site.find(:first)
+    pages = site.pages.find(:all)
     pages.select {|p| p.body =~ /#{wiki_word}/i}
   end
+  
+  private
+  
+  def updatable
+    unless self.locked_at.nil?
+      errors.add("page", "is locked from editing.")
+    end
+  end
+  
 end

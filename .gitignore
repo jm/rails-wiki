@@ -5,3 +5,6 @@ tmp/**/*
 .DS_Store
 doc/api
 doc/app
+db/*.db
+db/*.sqlite3
+index/*

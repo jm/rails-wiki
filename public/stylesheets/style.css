@@ -40,6 +40,13 @@ a {
 	margin: 5px;
 }
 
+#flash #site {
+  background: #F7E69D;
+	border: 2px solid #D7C67D;
+	padding: 10px;
+	margin: 5px;
+}
+
 #site_name {
 	text-decoration: none;
 	color: white;
@@ -49,6 +56,11 @@ a {
 #subtitle {
   font-size: 8pt;
   color: #884444;
+}
+
+.subtext {
+  color: #999;
+  font-size: 8pt;
 }
 
 /******************************************************************

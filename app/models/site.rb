@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 10
+# Schema version: 13
 #
 # Table name: sites
 #
@@ -15,7 +15,8 @@
 #
 
 class Site < ActiveRecord::Base
-  
+  has_many :pages
+
   def title
     super || "Signal"
   end

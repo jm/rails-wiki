@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 13) do
     t.datetime "updated_at"
   end
 
+  create_table "links", :force => true do |t|
+    t.integer  "from_page_id"
+    t.integer  "to_page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "open_id_authentication_associations", :force => true do |t|
     t.binary  "server_url"
     t.string  "handle"
@@ -52,7 +59,8 @@ ActiveRecord::Schema.define(:version => 13) do
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "private_page", :default => false
+    t.boolean  "private_page"
+    t.integer  "site_id"
   end
 
   create_table "pages", :force => true do |t|
@@ -77,6 +85,8 @@ ActiveRecord::Schema.define(:version => 13) do
     t.datetime "updated_at"
     t.boolean  "private_page"
     t.integer  "version"
+    t.integer  "site_id"
+    t.datetime "locked_at"
   end
 
   create_table "pv", :force => true do |t|
